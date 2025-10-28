@@ -37,7 +37,6 @@ using System.Windows.Forms;
             textbox = new Label();
             Nombre = new TextBox();
             Precio = new TextBox();
-            Vigencia = new TextBox();
             label1 = new Label();
             Registro = new Button();
             Volver = new Button();
@@ -68,7 +67,7 @@ using System.Windows.Forms;
             textbox.Name = "textbox";
             textbox.Size = new Size(66, 20);
             textbox.TabIndex = 2;
-            textbox.Text = "Vigencia";
+            textbox.Text = "Precio";
             // 
             // Nombre
             // 
@@ -83,13 +82,6 @@ using System.Windows.Forms;
             Precio.Name = "Precio";
             Precio.Size = new Size(169, 27);
             Precio.TabIndex = 4;
-            // 
-            // Vigencia
-            // 
-            Vigencia.Location = new Point(288, 215);
-            Vigencia.Name = "Vigencia";
-            Vigencia.Size = new Size(169, 27);
-            Vigencia.TabIndex = 5;
             // 
             // label1
             // 
@@ -134,7 +126,6 @@ using System.Windows.Forms;
             Controls.Add(Volver);
             Controls.Add(Registro);
             Controls.Add(label1);
-            Controls.Add(Vigencia);
             Controls.Add(Precio);
             Controls.Add(Nombre);
             Controls.Add(textbox);
@@ -154,7 +145,6 @@ using System.Windows.Forms;
         private Label textbox;
         private TextBox Nombre;
         private TextBox Precio;
-        private TextBox Vigencia;
         private Label label1;
         private Button Registro;
         private Button Volver;
