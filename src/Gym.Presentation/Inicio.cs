@@ -1,46 +1,69 @@
 using System;
 using System.Drawing;
 using System.Windows.Forms;
+using Gym.Domain.Entities;
 
 namespace Gym.Presentation
 {
-	// Formulario Inicio mínimo y válido. Ajusta controles y eventos según tu UI.
-	public partial class Inicio : Form
-	{
-		public Inicio()
-		{
-			InitializeComponent(); // Método generado por el diseñador (no volver a declarar)
+	 public partial class Inicio : Form
+    {
+        private readonly Administrador admin = new()
+        {
+            mail = "admin@gmail.com",
+            contraseña = "admin123"
+        };
 
-			// Añade aquí modificaciones/controles adicionales sin recrear InitializeComponent
-			var labelBienvenida = new Label
-			{
-				Text = "Bienvenido al sistema GYM",
-				AutoSize = true,
-				Location = new Point(20, 20)
-			};
-			this.Controls.Add(labelBienvenida);
-		}
+        public Inicio()
+        {
+            InitializeComponent();
+        }
 
-		// Métodos que el Designer espera (stubs mínimos para compilar).
-		private void Email_TextChanged(object sender, EventArgs e)
-		{
-			// TODO: validar o reaccionar al cambio del email
-		}
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            Ingreso.Enabled = false;
+        }
 
-		private void Contraseña_TextChanged(object sender, EventArgs e)
-		{
-			// TODO: validar o reaccionar al cambio de contraseña
-		}
+        private void Verificar()
+        {
+            bool emailValido = !string.IsNullOrWhiteSpace(Email.Text) && Email.Text == admin.mail;
+            bool contraseñaValida = !string.IsNullOrWhiteSpace(Contraseña.Text) && Contraseña.Text == admin.contraseña;
+            Ingreso.Enabled = emailValido && contraseñaValida;
+            if (!emailValido)
+            {
+                errorProvider1.SetError(Email, "Correo electrónico inválido.");
+            }
+            else
+            {
+                errorProvider1.SetError(Email, string.Empty);
+            }
+            if (!contraseñaValida)
+            {
+                errorProvider1.SetError(Contraseña, "Contraseña inválida.");
+            }
+            else
+            {
+                errorProvider1.SetError(Contraseña, string.Empty);
+            }
+        }
+        private void Email_TextChanged(object sender, EventArgs e)
+        {
+            Verificar();
+        }
 
-		private void Ingreso_Click_1(object sender, EventArgs e)
-		{
-			// TODO: lógica de ingreso; por ahora un mensaje mínimo para verificar el evento
-			MessageBox.Show("Botón Ingreso pulsado.", "Ingreso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-		}
+        private void Contraseña_TextChanged(object sender, EventArgs e)
+        {
+            Verificar();
+        }
 
-		private void Form1_Load(object sender, EventArgs e)
-		{
-			// TODO: inicializaciones al cargar el formulario
-		}
-	}
+        private void Ingreso_Click(object sender, EventArgs e)
+        {
+            
+
+        }
+
+        private void Ingreso_Click_1(object sender, EventArgs e)
+        {
+            using (Menu menu = new Menu(Email.Text, Contraseña.Text)) { menu.ShowDialog(); }
+        }
+    }
 }

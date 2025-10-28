@@ -151,7 +151,74 @@ El sistema utiliza **SQL Server** con **Entity Framework Core** para el acceso a
 - Visual Studio 2022 o superior
 - .NET 8.0 SDK
 - SQL Server
+- Entity Framework Core Tools
 
+### Instalación de Entity Framework Core Tools
+```bash
+dotnet tool install --global dotnet-ef
+```
+
+## 🗄️ Configuración de Base de Datos y Migraciones
+
+### Configuración de Conexión
+El proyecto está configurado para usar **SQL Server** en Windows con la siguiente cadena de conexión:
+```csharp
+"Server=localHost;Database=SistemaGym_;Trusted_Connection=True;TrustServerCertificate=True;"
+```
+
+### Pasos para Crear y Aplicar Migraciones
+
+#### Opción 1: Crear Migración desde macOS (Recomendado)
+```bash
+# 1. Navegar al directorio del proyecto
+cd TP_GYM_Grupo4-main
+
+# 2. Limpiar el proyecto
+dotnet clean
+
+# 3. Crear migración (solo desde Infrastructure)
+dotnet ef migrations add InitialCreate --project src/Gym.Infrastructure
+
+# 4. Aplicar migración en Windows
+dotnet ef database update --project src/Gym.Infrastructure --startup-project src/Gym.Presentation
+```
+
+#### Opción 2: Todo en Windows
+```bash
+# 1. Navegar al directorio del proyecto
+cd TP_GYM_Grupo4-main
+
+# 2. Limpiar el proyecto
+dotnet clean
+
+# 3. Compilar el proyecto
+dotnet build
+
+# 4. Crear migración
+dotnet ef migrations add InitialCreate --project src/Gym.Infrastructure --startup-project src/Gym.Presentation
+
+# 5. Aplicar migración
+dotnet ef database update --project src/Gym.Infrastructure --startup-project src/Gym.Presentation
+```
+
+### Comandos Útiles para Migraciones
+
+#### Limpiar Base de Datos (Si es necesario)
+```sql
+-- Conectar a SQL Server y ejecutar:
+DROP DATABASE IF EXISTS SistemaGym_;
+CREATE DATABASE SistemaGym_;
+```
+
+#### Verificar Migraciones Aplicadas
+```bash
+dotnet ef migrations list --project src/Gym.Infrastructure
+```
+
+#### Eliminar Última Migración (Si hay errores)
+```bash
+dotnet ef migrations remove --project src/Gym.Infrastructure
+```
 
 ### Pasos para Ejecutar el Proyecto
 
@@ -163,7 +230,7 @@ El sistema utiliza **SQL Server** con **Entity Framework Core** para el acceso a
 
 2. **Configurar la base de datos**
    - Asegúrate de que SQL Server esté ejecutándose
-   - Modifica la cadena de conexión en `ApplicationDbContext.cs` si es necesario
+   - Ejecuta las migraciones siguiendo los pasos anteriores
 
 3. **Compilar el proyecto**
    ```bash
