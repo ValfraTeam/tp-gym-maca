@@ -1,0 +1,79 @@
+## .NET Core
+bin/
+obj/
+out/
+
+## Build results
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Bb]uild/
+[Bb]in/
+[Oo]bj/
+
+## Visual Studio cache/options
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+## .NET Core
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+## VS Code
+.vscode/
+
+## Rider
+.idea/
+
+## SQL Server Local DB
+*.mdf
+*.ldf
+*.ndf
+
+## SQLite
+*.db
+*.sqlite
+
+## User-specific files
+*.rsuser
+*.user
+
+## Database files
+*.db-shm
+*.db-wal
+
+## macOS
+.DS_Store
+
+## Temporary files
+*.tmp
+*.temp
+*~
+
+## NuGet Packages
+*.nupkg
+*.snupkg
+**/packages/*
+!**/packages/build/
+
+## Node (si usas algo de frontend con Node)
+node_modules/
+
+## Logs
+logs/
+*.log
+npm-debug.log*
+
+## Rider
+.idea/
+
+## Migrations - COMENTADO para que se suban las migraciones
+# Migrations/
+
+## appsettings.json local (si usas uno diferente)
+# appsettings.Development.json
