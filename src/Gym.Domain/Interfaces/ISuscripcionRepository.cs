@@ -7,9 +7,11 @@ namespace Gym.Domain.Interfaces
         void Agregar(Suscripcion suscripcion);
         void Actualizar(Suscripcion suscripcion);
         void Eliminar(int id);
+        void Desactivar(int id);
         Suscripcion? ObtenerPorId(int id);
         Suscripcion? ObtenerPorNombre(string nombre);
         List<Suscripcion> ObtenerTodas();
+        List<Suscripcion> ObtenerActivas();
     }
 }
 

@@ -36,6 +36,16 @@ namespace Gym.Infrastructure.Repositories
             }
         }
 
+        public void Desactivar(int id)
+        {
+            var suscripcion = _context.Suscripciones.Find(id);
+            if (suscripcion != null)
+            {
+                suscripcion.EstaActivo = false;
+                _context.SaveChanges();
+            }
+        }
+
         public Suscripcion? ObtenerPorId(int id)
         {
             return _context.Suscripciones.Find(id);
@@ -49,6 +59,11 @@ namespace Gym.Infrastructure.Repositories
         public List<Suscripcion> ObtenerTodas()
         {
             return _context.Suscripciones.ToList();
+        }
+
+        public List<Suscripcion> ObtenerActivas()
+        {
+            return _context.Suscripciones.Where(s => s.EstaActivo).ToList();
         }
     }
 }

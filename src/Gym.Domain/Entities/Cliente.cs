@@ -14,6 +14,7 @@ namespace Gym.Domain.Entities
         public string Nombre { get; set; }
         public string Apellido { get; set; }
         public int Telefono { get; set; }
+        public bool EstaActivo { get; set; } = true;
         
         // Navegación N:M a través de SuscripcionCliente
         public List<SuscripcionCliente> Suscripciones { get; set; } = new List<SuscripcionCliente>();

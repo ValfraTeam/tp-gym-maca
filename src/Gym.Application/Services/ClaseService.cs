@@ -26,7 +26,7 @@ namespace Gym.Application.Services
 
         public List<Clase> ObtenerTodasLasClases()
         {
-            return _repository.ObtenerTodas();
+            return _repository.ObtenerActivas();
         }
 
         public Clase? ObtenerClasePorId(int id)
@@ -41,7 +41,12 @@ namespace Gym.Application.Services
 
         public void EliminarClase(int id)
         {
-            _repository.Eliminar(id);
+            _repository.Desactivar(id);
+        }
+
+        public void DesactivarClase(int id)
+        {
+            _repository.Desactivar(id);
         }
     }
 }

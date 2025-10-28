@@ -38,7 +38,7 @@ namespace Gym.Application.Services
 
         public List<Suscripcion> ObtenerTodasLasSuscripciones()
         {
-            return _repository.ObtenerTodas();
+            return _repository.ObtenerActivas();
         }
 
         public Suscripcion? ObtenerSuscripcionPorId(int id)
@@ -55,31 +55,13 @@ namespace Gym.Application.Services
                 throw new ArgumentException("La suscripción no existe");
             }
 
-            // Verificar si tiene clientes asociados
-            if (_suscripcionClienteRepository.TieneClientesAsociados(id))
-            {
-                // Obtener información de los clientes afectados para el mensaje de error
-                var clientesAsociados = _suscripcionClienteRepository.ObtenerPorSuscripcionId(id);
-                var nombresClientes = clientesAsociados
-                    .Select(sc => $"{sc.Cliente.Nombre} {sc.Cliente.Apellido}")
-                    .Take(3) // Mostrar máximo 3 clientes
-                    .ToList();
+            // Desactivar en lugar de eliminar físicamente
+            _repository.Desactivar(id);
+        }
 
-                var mensajeClientes = nombresClientes.Count > 0 
-                    ? $"Clientes afectados: {string.Join(", ", nombresClientes)}"
-                    : "Tiene clientes asociados";
-
-                var mensajeAdicional = clientesAsociados.Count > 3 
-                    ? $" y {clientesAsociados.Count - 3} más" 
-                    : "";
-
-                throw new InvalidOperationException(
-                    $"No se puede eliminar la suscripción '{suscripcion.Nombre}' porque tiene clientes asociados. " +
-                    $"{mensajeClientes}{mensajeAdicional}. " +
-                    $"Para eliminar esta suscripción, primero debe cambiar a estos clientes a otra suscripción.");
-            }
-
-            _repository.Eliminar(id);
+        public void DesactivarSuscripcion(int id)
+        {
+            _repository.Desactivar(id);
         }
 
         public void ActualizarSuscripcion(Suscripcion suscripcion)

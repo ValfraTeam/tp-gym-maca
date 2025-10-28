@@ -1,12 +1,20 @@
 # Sistema de Gestión de Gimnasio
 
-## Descripción del Proyecto
+## 📋 Descripción del Proyecto
 
 Este es un sistema de gestión para un gimnasio desarrollado en C# con arquitectura en capas. El sistema permite administrar clientes, suscripciones, clases, pagos y generar reportes.
 
-## Arquitectura del Proyecto
+## 🚀 Tecnologías Utilizadas
 
-El proyecto está estructurado siguiendo los principios de capas con separación clara de responsabilidades en 4 capas principales:
+- **.NET 8.0** - Framework de desarrollo
+- **C#** - Lenguaje de programación
+- **Windows Forms** - Interfaz de usuario
+- **Entity Framework Core** - ORM para acceso a datos
+- **SQL Server** - Base de datos
+
+## 🏗️ Arquitectura del Proyecto
+
+El proyecto está estructurado siguiendo los principios de **Clean Architecture** con separación clara de responsabilidades en 4 capas principales:
 
 ### 📁 Estructura de Carpetas
 
@@ -18,7 +26,8 @@ TP_GYM_Grupo4-main/
     │   ├── Entities/                 # Entidades del negocio
     │   └── Interfaces/               # Interfaces de repositorios
     ├── Gym.Application/              # Capa de Aplicación
-    │   └── Services/                 # Servicios de aplicación
+    │   ├── Services/                 # Servicios de aplicación
+    │   └── ServiceContainer.cs       # Gestión de dependencias
     ├── Gym.Infrastructure/           # Capa de Infraestructura
     │   ├── Data/                     # Contexto de base de datos
     │   └── Repositories/             # Implementaciones de repositorios
@@ -27,9 +36,9 @@ TP_GYM_Grupo4-main/
         └── Program.cs                # Punto de entrada de la aplicación
 ```
 
-## 🏗️ Capas de la Arquitectura
+### 🏛️ Capas de la Arquitectura
 
-### 1. **Gym.Domain** - Capa de Dominio
+#### 1. **Gym.Domain** - Capa de Dominio
 **Propósito**: Contiene la lógica de negocio y las entidades principales.
 
 **Contenido**:
@@ -42,13 +51,13 @@ TP_GYM_Grupo4-main/
   - `Administrador.cs` - Usuarios administradores del sistema
 
 - **Interfaces/**: Contratos para repositorios
-  - `IClienteRepository.cs` - Operaciones CRUD para clientes
-  - `ISuscripcionRepository.cs` - Operaciones para suscripciones
+  - `IClienteRepository.cs` - Operaciones AMB  para clientes
+  - `ISuscripcionRepository.cs` - Operaciones AMB para suscripciones
   - `ISuscripcionClienteRepository.cs` - Operaciones para relación cliente-suscripción
-  - `IClaseRepository.cs` - Operaciones para clases
+  - `IClaseRepository.cs` - Operaciones AMB para clases
   - `IPagoRepository.cs` - Operaciones para pagos
 
-### 2. **Gym.Application** - Capa de Aplicación
+#### 2. **Gym.Application** - Capa de Aplicación
 **Propósito**: Contiene la lógica de aplicación y casos de uso.
 
 **Contenido**:
@@ -56,9 +65,10 @@ TP_GYM_Grupo4-main/
   - `ClienteService.cs` - Lógica de negocio para gestión de clientes
   - `SuscripcionService.cs` - Lógica para gestión de suscripciones
   - `SuscripcionClienteService.cs` - Lógica para relación cliente-suscripción
+  - `ClaseService.cs` - Lógica para gestión de clases
 - `ServiceContainer.cs` - Contenedor de inyección de dependencias
 
-### 3. **Gym.Infrastructure** - Capa de Infraestructura
+#### 3. **Gym.Infrastructure** - Capa de Infraestructura
 **Propósito**: Implementa el acceso a datos y servicios externos.
 
 **Contenido**:
@@ -70,15 +80,14 @@ TP_GYM_Grupo4-main/
   - `SuscripcionClienteRepository.cs` - Implementación del repositorio de relación cliente-suscripción
   - `ClaseRepository.cs` - Implementación del repositorio de clases
   - `PagoRepository.cs` - Implementación del repositorio de pagos
-  - `PlanRepository.cs` - Implementación del repositorio de planes
 
-### 4. **Gym.Presentation** - Capa de Presentación
+#### 4. **Gym.Presentation** - Capa de Presentación
 **Propósito**: Interfaz de usuario Windows Forms.
 
 **Contenido**:
 - **Forms/**: Formularios organizados por módulos
   - **Cliente/**: Gestión de clientes (Alta, Modificación, Eliminación)
-  - **Suscripcion/**: Gestión de suscripciones
+  - **Suscripcion/**: Gestión de suscripciones (Alta, Baja, Modificación)
   - **Clases/**: Gestión de clases
   - **Pago/**: Gestión de pagos
   - **Reportes/**: Generación de reportes
@@ -94,7 +103,6 @@ El sistema utiliza **SQL Server** con **Entity Framework Core** para el acceso a
 - **Servidor**: localhost,1433
 - **Base de datos**: SistemaGym
 
-
 ### Entidades Principales y Relaciones
 
 1. **Cliente** ↔ **SuscripcionCliente** ↔ **Suscripcion**
@@ -105,27 +113,21 @@ El sistema utiliza **SQL Server** con **Entity Framework Core** para el acceso a
    - Un cliente puede tener múltiples pagos
 
 3. **Clase**
-   - Entidad independiente para las clases del gimnasio
-
-## 🚀 Tecnologías Utilizadas
-
-- **.NET 8.0** - Framework de desarrollo
-- **C#** - Lenguaje de programación
-- **Windows Forms** - Interfaz de usuario
-- **Entity Framework Core** - ORM para acceso a datos
-- **SQL Server** - Base de datos
+   - Entidad independiente para las clases del gimnasio (NO HAY RELACIONES)
 
 ## 📋 Funcionalidades Principales
 
 ### Gestión de Clientes
 - ✅ Alta de nuevos clientes
 - ✅ Modificación de datos de clientes
-- ✅ Eliminación de clientes
+- ✅ Eliminación lógica de clientes
 - ✅ Búsqueda por DNI
-- ✅ Listado de todos los clientes
+- ✅ Listado de todos los clientes activos
 
 ### Gestión de Suscripciones
 - ✅ Alta de nuevas suscripciones
+- ✅ Baja de suscripciones (eliminación lógica)
+- ✅ Modificación de suscripciones
 - ✅ Asignación de suscripciones a clientes
 - ✅ Control de fechas de inicio y fin
 - ✅ Validación de suscripciones activas
@@ -133,11 +135,11 @@ El sistema utiliza **SQL Server** con **Entity Framework Core** para el acceso a
 ### Gestión de Clases
 - ✅ Alta de nuevas clases
 - ✅ Modificación de clases existentes
+- ✅ Eliminación lógica de clases
 - ✅ Gestión de horarios y capacidad
 
 ### Gestión de Pagos
 - ✅ Registro de pagos
-- ✅ Generación de facturas
 - ✅ Historial de pagos por cliente
 
 ### Reportes
@@ -145,13 +147,81 @@ El sistema utiliza **SQL Server** con **Entity Framework Core** para el acceso a
 - ✅ Reporte de ganancias
 - ✅ Estadísticas del gimnasio
 
-## 🔧 Configuración del Proyecto
+## 🗑️ Flujo de Eliminación Lógica
 
-### Requisitos Previos
-- Visual Studio 2022 o superior
-- .NET 8.0 SDK
-- SQL Server
-- Entity Framework Core Tools
+El sistema implementa **eliminación lógica** en lugar de eliminación física para preservar la integridad de los datos y permitir auditoría completa.
+
+### 🔄 Proceso de Eliminación Lógica
+
+```
+Usuario → Form → Service → Repository → Database
+   ↓       ↓       ↓         ↓           ↓
+Eliminar → Eliminar → Eliminar → Desactivar → EstaActivo = false
+```
+
+### 📋 Entidades con Eliminación Lógica
+
+Todas las entidades principales incluyen el campo `EstaActivo`:
+
+- **Cliente**: `public bool EstaActivo { get; set; } = true;`
+- **Suscripcion**: `public bool EstaActivo { get; set; } = true;`
+- **Clase**: `public bool EstaActivo { get; set; } = true;`
+
+### 🎯 Comportamiento del Sistema
+
+#### Al Eliminar un Registro:
+1. **Usuario hace clic en "Eliminar"** en el formulario
+2. **Formulario llama al servicio** (`EliminarCliente()`, `EliminarSuscripcion()`, etc.)
+3. **Servicio llama al repositorio** (`Desactivar()`)
+4. **Repositorio marca** `EstaActivo = false` en la base de datos
+5. **Registro se mantiene** en la base de datos pero aparece como "eliminado"
+
+#### Al Listar Registros:
+- **Servicios devuelven solo registros activos** (`EstaActivo = true`)
+- **Los registros "eliminados" no aparecen** en los listados normales
+- **Los datos se preservan** para auditoría y reportes históricos
+
+### ✅ Beneficios de la Eliminación Lógica
+
+- **📊 Preservación de Datos**: Los registros eliminados se mantienen en la base de datos
+- **🔍 Auditoría Completa**: Se puede rastrear todo el historial de operaciones
+- **📈 Reportes Históricos**: Los reportes pueden incluir datos de registros "eliminados"
+- **🔄 Recuperación**: Los datos pueden ser reactivados si es necesario
+- **🛡️ Integridad**: No se pierden relaciones con otros datos
+- **📋 Cumplimiento**: Facilita el cumplimiento de regulaciones de retención de datos
+
+### 🔧 Implementación Técnica
+
+#### Interfaces de Repositorio:
+```csharp
+public interface IClienteRepository
+{
+    void Eliminar(int id);        // Eliminación física (mantenido para casos especiales)
+    void Desactivar(int id);      // Eliminación lógica (usado por defecto)
+    List<Cliente> ObtenerActivos(); // Solo registros activos
+}
+```
+
+#### Servicios:
+```csharp
+public void EliminarCliente(int id)
+{
+    _clienteRepository.Desactivar(id); // Usa eliminación lógica
+}
+```
+
+#### Repositorios:
+```csharp
+public void Desactivar(int id)
+{
+    var cliente = _context.Clientes.Find(id);
+    if (cliente != null)
+    {
+        cliente.EstaActivo = false; // Marca como inactivo
+        _context.SaveChanges();
+    }
+}
+```
 
 ### Instalación de Entity Framework Core Tools
 ```bash
@@ -168,47 +238,15 @@ El proyecto está configurado para usar **SQL Server** en Windows con la siguien
 
 ### Pasos para Crear y Aplicar Migraciones
 
-#### Opción 1: Crear Migración desde macOS (Recomendado)
-```bash
-# 1. Navegar al directorio del proyecto
-cd TP_GYM_Grupo4-main
-
-# 2. Limpiar el proyecto
-dotnet clean
-
-# 3. Crear migración (solo desde Infrastructure)
-dotnet ef migrations add InitialCreate --project src/Gym.Infrastructure
-
-# 4. Aplicar migración en Windows
-dotnet ef database update --project src/Gym.Infrastructure --startup-project src/Gym.Presentation
-```
-
-#### Opción 2: Todo en Windows
-```bash
-# 1. Navegar al directorio del proyecto
-cd TP_GYM_Grupo4-main
-
-# 2. Limpiar el proyecto
-dotnet clean
-
-# 3. Compilar el proyecto
-dotnet build
-
-# 4. Crear migración
-dotnet ef migrations add InitialCreate --project src/Gym.Infrastructure --startup-project src/Gym.Presentation
-
-# 5. Aplicar migración
-dotnet ef database update --project src/Gym.Infrastructure --startup-project src/Gym.Presentation
-```
-
 ### Comandos Útiles para Migraciones
 
-#### Limpiar Base de Datos (Si es necesario)
+#### Limpiar Base de Datos
 ```sql
 -- Conectar a SQL Server y ejecutar:
 DROP DATABASE IF EXISTS SistemaGym_;
 CREATE DATABASE SistemaGym_;
 ```
+- o directamente eliminen desde su SQL SERVER la BD
 
 #### Verificar Migraciones Aplicadas
 ```bash
@@ -220,15 +258,33 @@ dotnet ef migrations list --project src/Gym.Infrastructure
 dotnet ef migrations remove --project src/Gym.Infrastructure
 ```
 
-### Pasos para Ejecutar el Proyecto
+#### Hacer en Windows
+```bash
+# 1. Navegar al directorio del proyecto
+cd "la raiz del proyecto"
 
-1. **Clonar el repositorio**
+# 2. Limpiar el proyecto
+dotnet clean
+
+# 3. Compilar el proyecto
+dotnet build
+
+# 4. Crear migración
+dotnet ef migrations add InitialCreate --project src/Gym.Infrastructure --startup-project src/Gym.Presentation
+
+# 5. Aplicar migración- con esto actualizan la BD
+dotnet ef database update --project src/Gym.Infrastructure --startup-project src/Gym.Presentation
+```
+
+## 🚀 Pasos para Ejecutar el Proyecto
+
+1. **Clonar el repositorio** No hace falta hacerlo si ya lo clonaron antes
    ```bash
    git clone [URL_DEL_REPOSITORIO]
    cd TP_GYM_Grupo4-main
    ```
 
-2. **Configurar la base de datos**
+2. **Configurar la base de datos** 
    - Asegúrate de que SQL Server esté ejecutándose
    - Ejecuta las migraciones siguiendo los pasos anteriores
 
@@ -242,19 +298,13 @@ dotnet ef migrations remove --project src/Gym.Infrastructure
    dotnet run --project src/Gym.Presentation
    ```
 
-## 🏛️ Patrones de Diseño Implementados
-
-- **Repository Pattern**: Para abstraer el acceso a datos
-- **Dependency Injection**: Para inyección de dependencias
-- **Clean Architecture**: Separación clara de responsabilidades
-- **Service Layer Pattern**: Para encapsular la lógica de negocio
-
 ## 📝 Notas de Desarrollo
 
 - El proyecto sigue las convenciones de nomenclatura de C#
 - Se implementa validación de datos en la capa de aplicación
 - Las relaciones de base de datos están configuradas con Entity Framework
 - La interfaz de usuario utiliza Windows Forms con diseño responsivo
+- Se implementa eliminación lógica para preservar la integridad de los datos
 
 ## 👥 Equipo de Desarrollo
 

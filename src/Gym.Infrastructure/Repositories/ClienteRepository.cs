@@ -43,6 +43,16 @@ namespace Gym.Infrastructure.Repositories
             }
         }
 
+        public void Desactivar(int id)
+        {
+            var cliente = _context.Clientes.Find(id);
+            if (cliente != null)
+            {
+                cliente.EstaActivo = false;
+                _context.SaveChanges();
+            }
+        }
+
         public Cliente? ObtenerPorId(int id)
         {
             return _context.Clientes.Find(id);
@@ -56,6 +66,11 @@ namespace Gym.Infrastructure.Repositories
         public List<Cliente> ObtenerTodos()
         {
             return _context.Clientes.ToList();
+        }
+
+        public List<Cliente> ObtenerActivos()
+        {
+            return _context.Clientes.Where(c => c.EstaActivo).ToList();
         }
     }
 }

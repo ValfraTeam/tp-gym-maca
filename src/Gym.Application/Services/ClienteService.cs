@@ -59,12 +59,17 @@ namespace Gym.Application.Services
 
         public List<Cliente> ObtenerTodosLosClientes()
         {
-            return _clienteRepository.ObtenerTodos();
+            return _clienteRepository.ObtenerActivos();
         }
 
         public void EliminarCliente(int id)
         {
-            _clienteRepository.Eliminar(id);
+            _clienteRepository.Desactivar(id);
+        }
+
+        public void DesactivarCliente(int id)
+        {
+            _clienteRepository.Desactivar(id);
         }
 
         public void ActualizarCliente(Cliente cliente)

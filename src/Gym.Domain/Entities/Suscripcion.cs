@@ -17,6 +17,7 @@ namespace Gym.Domain.Entities
         [Required(ErrorMessage = "El precio es obligatorio")]
         [Range(0.01, 999999.99, ErrorMessage = "El precio debe ser mayor a 0 y menor a 999999.99")]
         public decimal Precio { get; set; }
+        public bool EstaActivo { get; set; } = true;
       
         // Navegación N:M a través de SuscripcionCliente
         public List<SuscripcionCliente> Clientes { get; set; } = new List<SuscripcionCliente>();

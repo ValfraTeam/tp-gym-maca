@@ -14,6 +14,7 @@ namespace Gym.Domain.Entities
         public TimeOnly HoraInicio { get; set; }
         public TimeOnly HoraFin { get; set; }
         public DiaSemana Dias { get; set; }
+        public bool EstaActivo { get; set; } = true;
         public enum DiaSemana
         {
             Lunes,

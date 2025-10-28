@@ -36,6 +36,16 @@ namespace Gym.Infrastructure.Repositories
             }
         }
 
+        public void Desactivar(int id)
+        {
+            var clase = _context.Clases.Find(id);
+            if (clase != null)
+            {
+                clase.EstaActivo = false;
+                _context.SaveChanges();
+            }
+        }
+
         public Clase? ObtenerPorId(int id)
         {
             return _context.Clases.Find(id);
@@ -44,6 +54,11 @@ namespace Gym.Infrastructure.Repositories
         public List<Clase> ObtenerTodas()
         {
             return _context.Clases.ToList();
+        }
+
+        public List<Clase> ObtenerActivas()
+        {
+            return _context.Clases.Where(c => c.EstaActivo).ToList();
         }
     }
 }
