@@ -4,11 +4,11 @@ namespace Gym.Domain.Interfaces
 {
     public interface IClaseRepository
     {
-        void Add(Clase clase);
-        void Update(Clase clase);
-        void Delete(int id);
-        Clase GetById(int id);
-        List<Clase> GetAll();
+        void Agregar(Clase clase);
+        void Actualizar(Clase clase);
+        void Eliminar(int id);
+        Clase? ObtenerPorId(int id);
+        List<Clase> ObtenerTodas();
     }
 }
 

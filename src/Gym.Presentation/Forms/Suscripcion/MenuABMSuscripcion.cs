@@ -23,6 +23,16 @@ namespace Gym.Presentation
             using (AltaSuscripcion altaSuscripcion = new AltaSuscripcion()) { altaSuscripcion.ShowDialog(); }
         }
 
+        private void BajaSuscripcion_Click(object sender, EventArgs e)
+        {
+            using (BajaSuscripcion bajaSuscripcion = new BajaSuscripcion()) { bajaSuscripcion.ShowDialog(); }
+        }
+
+        private void ModificarSuscripcion_Click(object sender, EventArgs e)
+        {
+            using (ModificarSuscripcion modificarSuscripcion = new ModificarSuscripcion()) { modificarSuscripcion.ShowDialog(); }
+        }
+
         private void Volver_Click(object sender, EventArgs e)
         {
             this.Close();

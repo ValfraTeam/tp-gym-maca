@@ -14,19 +14,19 @@ namespace Gym.Infrastructure.Repositories
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
-        public void Add(Suscripcion suscripcion)
+        public void Agregar(Suscripcion suscripcion)
         {
             _context.Suscripciones.Add(suscripcion);
             _context.SaveChanges();
         }
 
-        public void Update(Suscripcion suscripcion)
+        public void Actualizar(Suscripcion suscripcion)
         {
             _context.Suscripciones.Update(suscripcion);
             _context.SaveChanges();
         }
 
-        public void Delete(int id)
+        public void Eliminar(int id)
         {
             var suscripcion = _context.Suscripciones.Find(id);
             if (suscripcion != null)
@@ -36,17 +36,17 @@ namespace Gym.Infrastructure.Repositories
             }
         }
 
-        public Suscripcion? GetById(int id)
+        public Suscripcion? ObtenerPorId(int id)
         {
             return _context.Suscripciones.Find(id);
         }
 
-        public Suscripcion? GetByName(string nombre)
+        public Suscripcion? ObtenerPorNombre(string nombre)
         {
             return _context.Suscripciones.FirstOrDefault(s => s.Nombre == nombre);
         }
 
-        public List<Suscripcion> GetAll()
+        public List<Suscripcion> ObtenerTodas()
         {
             return _context.Suscripciones.ToList();
         }

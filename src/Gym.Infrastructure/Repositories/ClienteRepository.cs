@@ -14,7 +14,7 @@ namespace Gym.Infrastructure.Repositories
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
-        public void Add(Cliente cliente)
+        public void Agregar(Cliente cliente)
         {
             // Verificar si ya existe un cliente con el mismo DNI
             var existente = _context.Clientes.FirstOrDefault(c => c.Dni == cliente.Dni);
@@ -27,13 +27,13 @@ namespace Gym.Infrastructure.Repositories
             _context.SaveChanges();
         }
 
-        public void Update(Cliente cliente)
+        public void Actualizar(Cliente cliente)
         {
             _context.Clientes.Update(cliente);
             _context.SaveChanges();
         }
 
-        public void Delete(int id)
+        public void Eliminar(int id)
         {
             var cliente = _context.Clientes.Find(id);
             if (cliente != null)
@@ -43,17 +43,17 @@ namespace Gym.Infrastructure.Repositories
             }
         }
 
-        public Cliente? GetById(int id)
+        public Cliente? ObtenerPorId(int id)
         {
             return _context.Clientes.Find(id);
         }
 
-        public Cliente? GetByDni(int dni)
+        public Cliente? ObtenerPorDni(int dni)
         {
             return _context.Clientes.FirstOrDefault(c => c.Dni == dni);
         }
 
-        public List<Cliente> GetAll()
+        public List<Cliente> ObtenerTodos()
         {
             return _context.Clientes.ToList();
         }

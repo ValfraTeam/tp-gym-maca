@@ -14,19 +14,19 @@ namespace Gym.Infrastructure.Repositories
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
-        public void Add(Clase clase)
+        public void Agregar(Clase clase)
         {
             _context.Clases.Add(clase);
             _context.SaveChanges();
         }
 
-        public void Update(Clase clase)
+        public void Actualizar(Clase clase)
         {
             _context.Clases.Update(clase);
             _context.SaveChanges();
         }
 
-        public void Delete(int id)
+        public void Eliminar(int id)
         {
             var clase = _context.Clases.Find(id);
             if (clase != null)
@@ -36,12 +36,12 @@ namespace Gym.Infrastructure.Repositories
             }
         }
 
-        public Clase? GetById(int id)
+        public Clase? ObtenerPorId(int id)
         {
             return _context.Clases.Find(id);
         }
 
-        public List<Clase> GetAll()
+        public List<Clase> ObtenerTodas()
         {
             return _context.Clases.ToList();
         }

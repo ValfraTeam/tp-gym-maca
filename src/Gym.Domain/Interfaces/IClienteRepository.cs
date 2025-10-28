@@ -4,11 +4,11 @@ namespace Gym.Domain.Interfaces
 {
     public interface IClienteRepository
     {
-        void Add(Cliente cliente);
-        void Update(Cliente cliente);
-        void Delete(int id);
-        Cliente? GetById(int id);
-        Cliente? GetByDni(int dni);
-        List<Cliente> GetAll();
+        void Agregar(Cliente cliente);
+        void Actualizar(Cliente cliente);
+        void Eliminar(int id);
+        Cliente? ObtenerPorId(int id);
+        Cliente? ObtenerPorDni(int dni);
+        List<Cliente> ObtenerTodos();
     }
 }

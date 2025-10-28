@@ -1,4 +1,6 @@
+using Gym.Application.Services;
 using Gym.Infrastructure.Data;
+using Gym.Infrastructure.Repositories;
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -10,7 +12,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Gym.Domain.Entities;
-using Gym.Infrastructure.Repositories;
 
 namespace Gym.Presentation
 {
@@ -40,8 +41,11 @@ namespace Gym.Presentation
                     Nombre = Nombre.Text,
                     Profesor = Profesor.Text
                 };
-                var claseRepository = new ClaseRepository(new ApplicationDbContext());
-                claseRepository.Add(nuevaClase);
+                // Usar el servicio (maneja validaciones de negocio)
+                var claseService = new ClaseService(
+                    new ClaseRepository(new ApplicationDbContext())
+                );
+                claseService.AgregarClase(nuevaClase);
                 MessageBox.Show("Clase creada con éxito.");
             }
         }

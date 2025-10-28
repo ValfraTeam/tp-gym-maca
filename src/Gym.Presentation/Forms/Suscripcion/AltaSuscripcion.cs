@@ -1,4 +1,6 @@
+using Gym.Application.Services;
 using Gym.Infrastructure.Data;
+using Gym.Infrastructure.Repositories;
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -10,7 +12,6 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.EntityFrameworkCore;
 using Gym.Domain.Entities;
-using Gym.Infrastructure.Repositories;
 
 namespace Gym.Presentation
 {
@@ -53,9 +54,11 @@ namespace Gym.Presentation
                     Precio = decimal.Parse(Precio.Text)
                 };
 
-                // Usar el repositorio (maneja validaciones automáticamente)
-                var suscripcionRepository = new SuscripcionRepository(new ApplicationDbContext());
-                suscripcionRepository.Add(nuevaSuscripcion);
+                // Usar el servicio (maneja validaciones de negocio)
+                var suscripcionService = new SuscripcionService(
+                    new SuscripcionRepository(new ApplicationDbContext())
+                );
+                suscripcionService.AgregarSuscripcion(nuevaSuscripcion);
                 
                 MessageBox.Show("Suscripción registrada con éxito.");
                 this.Close();

@@ -32,5 +32,6 @@ namespace Gym.Application
         public static ClienteService ClienteService => new ClienteService(ClienteRepository, SuscripcionClienteRepository);
         public static SuscripcionClienteService SuscripcionClienteService => new SuscripcionClienteService(SuscripcionClienteRepository);
         public static SuscripcionService SuscripcionService => new SuscripcionService(SuscripcionRepository);
+        public static ClaseService ClaseService => new ClaseService(ClaseRepository);
     }
 }

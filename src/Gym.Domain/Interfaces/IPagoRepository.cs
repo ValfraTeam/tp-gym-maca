@@ -4,11 +4,11 @@ namespace Gym.Domain.Interfaces
 {
     public interface IPagoRepository
     {
-        void Add(Pago pago);
-        void Update(Pago pago);
-        void Delete(int id);
-        Pago GetById(int id);
-        List<Pago> GetAll();
+        void Agregar(Pago pago);
+        void Actualizar(Pago pago);
+        void Eliminar(int id);
+        Pago? ObtenerPorId(int id);
+        List<Pago> ObtenerTodos();
     }
 }
 

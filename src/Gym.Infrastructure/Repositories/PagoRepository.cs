@@ -14,19 +14,19 @@ namespace Gym.Infrastructure.Repositories
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
-        public void Add(Pago pago)
+        public void Agregar(Pago pago)
         {
             _context.Pagos.Add(pago);
             _context.SaveChanges();
         }
 
-        public void Update(Pago pago)
+        public void Actualizar(Pago pago)
         {
             _context.Pagos.Update(pago);
             _context.SaveChanges();
         }
 
-        public void Delete(int id)
+        public void Eliminar(int id)
         {
             var pago = _context.Pagos.Find(id);
             if (pago != null)
@@ -36,12 +36,12 @@ namespace Gym.Infrastructure.Repositories
             }
         }
 
-        public Pago? GetById(int id)
+        public Pago? ObtenerPorId(int id)
         {
             return _context.Pagos.Find(id);
         }
 
-        public List<Pago> GetAll()
+        public List<Pago> ObtenerTodos()
         {
             return _context.Pagos.ToList();
         }

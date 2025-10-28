@@ -14,31 +14,31 @@ namespace Gym.Infrastructure.Repositories
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
-        public void Add(SuscripcionCliente suscripcionCliente)
+        public void Agregar(SuscripcionCliente suscripcionCliente)
         {
             _context.SuscripcionClientes.Add(suscripcionCliente);
             _context.SaveChanges();
         }
 
-        public void Update(SuscripcionCliente suscripcionCliente)
+        public void Actualizar(SuscripcionCliente suscripcionCliente)
         {
             _context.SuscripcionClientes.Update(suscripcionCliente);
             _context.SaveChanges();
         }
 
-        public void Delete(int id)
+        public void Eliminar(int id)
         {
             // Nota: Este método necesita ser ajustado según la clave primaria compuesta
             throw new NotImplementedException("Delete method needs to be implemented for composite key");
         }
 
-        public SuscripcionCliente? GetById(int id)
+        public SuscripcionCliente? ObtenerPorId(int id)
         {
             // Nota: Este método necesita ser ajustado según la clave primaria compuesta
             throw new NotImplementedException("GetById method needs to be implemented for composite key");
         }
 
-        public List<SuscripcionCliente> GetByClienteId(int clienteId)
+        public List<SuscripcionCliente> ObtenerPorClienteId(int clienteId)
         {
             return _context.SuscripcionClientes
                 .Include(sc => sc.Suscripcion)
@@ -48,7 +48,7 @@ namespace Gym.Infrastructure.Repositories
                 .ToList();
         }
 
-        public SuscripcionCliente? GetSuscripcionActiva(int clienteId)
+        public SuscripcionCliente? ObtenerSuscripcionActiva(int clienteId)
         {
             var ahora = DateTime.Now;
             return _context.SuscripcionClientes
@@ -59,7 +59,7 @@ namespace Gym.Infrastructure.Repositories
                                      ahora <= sc.FechaFin);
         }
 
-        public List<SuscripcionCliente> GetSuscripcionesActivas()
+        public List<SuscripcionCliente> ObtenerSuscripcionesActivas()
         {
             var ahora = DateTime.Now;
             return _context.SuscripcionClientes
@@ -69,7 +69,7 @@ namespace Gym.Infrastructure.Repositories
                 .ToList();
         }
 
-        public List<SuscripcionCliente> GetAll()
+        public List<SuscripcionCliente> ObtenerTodas()
         {
             return _context.SuscripcionClientes
                 .Include(sc => sc.Cliente)

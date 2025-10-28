@@ -85,7 +85,7 @@ namespace Gym.Presentation
         private void AltaCliente_Load(object sender, EventArgs e)
         {
             var suscripcionRepository = new SuscripcionRepository(new ApplicationDbContext());
-            comboBox1.DataSource = suscripcionRepository.GetAll();
+            comboBox1.DataSource = suscripcionRepository.ObtenerTodas();
             comboBox1.DisplayMember = "Nombre";
         }
     }

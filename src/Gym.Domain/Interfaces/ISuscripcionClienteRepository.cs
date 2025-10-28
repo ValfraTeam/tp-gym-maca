@@ -4,14 +4,14 @@ namespace Gym.Domain.Interfaces
 {
     public interface ISuscripcionClienteRepository
     {
-        void Add(SuscripcionCliente suscripcionCliente);
-        void Update(SuscripcionCliente suscripcionCliente);
-        void Delete(int id);
-        SuscripcionCliente GetById(int id);
-        List<SuscripcionCliente> GetByClienteId(int clienteId);
-        SuscripcionCliente GetSuscripcionActiva(int clienteId);
-        List<SuscripcionCliente> GetSuscripcionesActivas();
-        List<SuscripcionCliente> GetAll();
+        void Agregar(SuscripcionCliente suscripcionCliente);
+        void Actualizar(SuscripcionCliente suscripcionCliente);
+        void Eliminar(int id);
+        SuscripcionCliente? ObtenerPorId(int id);
+        List<SuscripcionCliente> ObtenerPorClienteId(int clienteId);
+        SuscripcionCliente? ObtenerSuscripcionActiva(int clienteId);
+        List<SuscripcionCliente> ObtenerSuscripcionesActivas();
+        List<SuscripcionCliente> ObtenerTodas();
     }
 }
 

@@ -25,27 +25,27 @@ namespace Gym.Application.Services
                 throw new ArgumentException("El ID de la suscripción debe ser válido");
 
             // Verificar si ya tiene una suscripción activa
-            var suscripcionActiva = _repository.GetSuscripcionActiva(suscripcionCliente.ClienteId);
+            var suscripcionActiva = _repository.ObtenerSuscripcionActiva(suscripcionCliente.ClienteId);
             if (suscripcionActiva != null)
             {
                 // Si ya tiene una activa, terminar la anterior
                 suscripcionActiva.FechaFin = DateTime.Now;
-                _repository.Update(suscripcionActiva);
+                _repository.Actualizar(suscripcionActiva);
             }
             
             // Crear la nueva suscripción
-            _repository.Add(suscripcionCliente);
+            _repository.Agregar(suscripcionCliente);
         }
 
         public void CambiarSuscripcion(int clienteId, int nuevaSuscripcionId, DateTime fechaInicio, DateTime fechaFin)
         {
             // 1. Terminar suscripción actual (si existe)
-            var suscripcionActual = _repository.GetSuscripcionActiva(clienteId);
+            var suscripcionActual = _repository.ObtenerSuscripcionActiva(clienteId);
             if (suscripcionActual != null)
             {
                 // Terminar la suscripción actual estableciendo FechaFin = ahora
                 suscripcionActual.FechaFin = DateTime.Now;
-                _repository.Update(suscripcionActual);
+                _repository.Actualizar(suscripcionActual);
             }
 
             // 2. Crear nueva suscripción
@@ -57,22 +57,22 @@ namespace Gym.Application.Services
                 FechaFin = fechaFin
             };
             
-            _repository.Add(nuevaSuscripcion);
+            _repository.Agregar(nuevaSuscripcion);
         }
 
         public SuscripcionCliente? ObtenerSuscripcionActiva(int clienteId)
         {
-            return _repository.GetSuscripcionActiva(clienteId);
+            return _repository.ObtenerSuscripcionActiva(clienteId);
         }
 
         public List<SuscripcionCliente> ObtenerSuscripcionesActivas()
         {
-            return _repository.GetSuscripcionesActivas();
+            return _repository.ObtenerSuscripcionesActivas();
         }
 
         public List<SuscripcionCliente> ObtenerHistorialCliente(int clienteId)
         {
-            return _repository.GetByClienteId(clienteId);
+            return _repository.ObtenerPorClienteId(clienteId);
         }
     }
 }

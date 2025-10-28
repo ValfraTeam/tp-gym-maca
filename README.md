@@ -38,7 +38,6 @@ TP_GYM_Grupo4-main/
   - `Suscripcion.cs` - Planes de suscripción disponibles
   - `SuscripcionCliente.cs` - Relación entre clientes y suscripciones
   - `Clase.cs` - Clases disponibles en el gimnasio
-  - `Factura.cs` - Facturas generadas
   - `Pago.cs` - Pagos realizados por los clientes
   - `Administrador.cs` - Usuarios administradores del sistema
 
@@ -71,7 +70,6 @@ TP_GYM_Grupo4-main/
   - `SuscripcionClienteRepository.cs` - Implementación del repositorio de relación cliente-suscripción
   - `ClaseRepository.cs` - Implementación del repositorio de clases
   - `PagoRepository.cs` - Implementación del repositorio de pagos
-  - `FacturaRepository.cs` - Implementación del repositorio de facturas
   - `PlanRepository.cs` - Implementación del repositorio de planes
 
 ### 4. **Gym.Presentation** - Capa de Presentación
@@ -106,10 +104,7 @@ El sistema utiliza **SQL Server** con **Entity Framework Core** para el acceso a
 2. **Cliente** → **Pago**
    - Un cliente puede tener múltiples pagos
 
-3. **Pago** → **Factura**
-   - Cada pago puede generar una factura
-
-4. **Clase**
+3. **Clase**
    - Entidad independiente para las clases del gimnasio
 
 ## 🚀 Tecnologías Utilizadas

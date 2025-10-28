@@ -30,15 +30,15 @@ namespace Gym.Application.Services
             var fechaFin = fechaInicio.AddMonths(1);
 
             // 1. Crear cliente
-            _clienteRepository.Add(cliente);
+            _clienteRepository.Agregar(cliente);
 
             // 2. Verificar si ya tiene una suscripción activa
-            var suscripcionActiva = _suscripcionClienteRepository.GetSuscripcionActiva(cliente.Id);
+            var suscripcionActiva = _suscripcionClienteRepository.ObtenerSuscripcionActiva(cliente.Id);
             if (suscripcionActiva != null)
             {
                 // Si ya tiene una activa, terminar la anterior
                 suscripcionActiva.FechaFin = DateTime.Now;
-                _suscripcionClienteRepository.Update(suscripcionActiva);
+                _suscripcionClienteRepository.Actualizar(suscripcionActiva);
             }
 
             // 3. Crear nueva suscripción
@@ -49,27 +49,27 @@ namespace Gym.Application.Services
                 FechaInicio = fechaInicio,
                 FechaFin = fechaFin
             };
-            _suscripcionClienteRepository.Add(suscripcionCliente);
+            _suscripcionClienteRepository.Agregar(suscripcionCliente);
         }
 
         public Cliente? ObtenerClientePorDni(int dni)
         {
-            return _clienteRepository.GetByDni(dni);
+            return _clienteRepository.ObtenerPorDni(dni);
         }
 
         public List<Cliente> ObtenerTodosLosClientes()
         {
-            return _clienteRepository.GetAll();
+            return _clienteRepository.ObtenerTodos();
         }
 
         public void EliminarCliente(int id)
         {
-            _clienteRepository.Delete(id);
+            _clienteRepository.Eliminar(id);
         }
 
         public void ActualizarCliente(Cliente cliente)
         {
-            _clienteRepository.Update(cliente);
+            _clienteRepository.Actualizar(cliente);
         }
     }
 }

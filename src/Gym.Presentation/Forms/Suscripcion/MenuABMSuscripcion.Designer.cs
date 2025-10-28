@@ -54,6 +54,7 @@ using Gym.Infrastructure.Data;
             BajaSuscripcion.TabIndex = 6;
             BajaSuscripcion.Text = "Dar de baja suscripción";
             BajaSuscripcion.UseVisualStyleBackColor = true;
+            BajaSuscripcion.Click += BajaSuscripcion_Click;
             // 
             // ModificarSuscripcion
             // 
@@ -63,6 +64,7 @@ using Gym.Infrastructure.Data;
             ModificarSuscripcion.TabIndex = 5;
             ModificarSuscripcion.Text = "Modificar Suscripción";
             ModificarSuscripcion.UseVisualStyleBackColor = true;
+            ModificarSuscripcion.Click += ModificarSuscripcion_Click;
             // 
             // AltaSuscripcion
             // 
