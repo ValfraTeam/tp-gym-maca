@@ -1,5 +1,5 @@
 using Gym.Application.Services;
-using Gym.Infrastructure.Data;
+using Gym.Application;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,9 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Microsoft.EntityFrameworkCore;
-using Gym.Domain.Entities;
-using Gym.Infrastructure.Repositories;  
+using Gym.Domain.Entities;  
 
 namespace Gym.Presentation
 {
@@ -59,11 +57,7 @@ namespace Gym.Presentation
 
                 // Usar el servicio para agregar cliente con suscripción
                 // El servicio calculará automáticamente la fecha de fin (1 mes por defecto)
-                var clienteService = new ClienteService(
-                    new ClienteRepository(new ApplicationDbContext()),
-                    new SuscripcionClienteRepository(new ApplicationDbContext())
-                );
-                clienteService.AgregarClienteConSuscripcion(
+                ServiceContainer.ClienteService.AgregarClienteConSuscripcion(
                     nuevoCliente, 
                     tipoSuscripcion.Id, 
                     fechaInicio
@@ -84,8 +78,7 @@ namespace Gym.Presentation
 
         private void AltaCliente_Load(object sender, EventArgs e)
         {
-            var suscripcionRepository = new SuscripcionRepository(new ApplicationDbContext());
-            comboBox1.DataSource = suscripcionRepository.ObtenerTodas();
+            comboBox1.DataSource = ServiceContainer.SuscripcionService.ObtenerTodasLasSuscripciones();
             comboBox1.DisplayMember = "Nombre";
         }
     }

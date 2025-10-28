@@ -1,6 +1,5 @@
 using Gym.Application.Services;
-using Gym.Infrastructure.Data;
-using Gym.Infrastructure.Repositories;
+using Gym.Application;
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -10,7 +9,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Microsoft.EntityFrameworkCore;
 using Gym.Domain.Entities;
 
 namespace Gym.Presentation
@@ -55,10 +53,7 @@ namespace Gym.Presentation
                 };
 
                 // Usar el servicio (maneja validaciones de negocio)
-                var suscripcionService = new SuscripcionService(
-                    new SuscripcionRepository(new ApplicationDbContext())
-                );
-                suscripcionService.AgregarSuscripcion(nuevaSuscripcion);
+                ServiceContainer.SuscripcionService.AgregarSuscripcion(nuevaSuscripcion);
                 
                 MessageBox.Show("Suscripción registrada con éxito.");
                 this.Close();

@@ -1,5 +1,8 @@
-using Gym.Infrastructure.Data;
-﻿namespace Gym.Presentation
+using System;
+using System.Drawing;
+using System.Windows.Forms;
+
+namespace Gym.Presentation
 {
     partial class EliminarCliente
     {

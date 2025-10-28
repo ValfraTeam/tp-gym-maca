@@ -12,6 +12,8 @@ namespace Gym.Domain.Interfaces
         SuscripcionCliente? ObtenerSuscripcionActiva(int clienteId);
         List<SuscripcionCliente> ObtenerSuscripcionesActivas();
         List<SuscripcionCliente> ObtenerTodas();
+        bool TieneClientesAsociados(int suscripcionId);
+        List<SuscripcionCliente> ObtenerPorSuscripcionId(int suscripcionId);
     }
 }
 

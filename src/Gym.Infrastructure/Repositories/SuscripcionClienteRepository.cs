@@ -76,5 +76,20 @@ namespace Gym.Infrastructure.Repositories
                 .Include(sc => sc.Suscripcion)
                 .ToList();
         }
+
+        public bool TieneClientesAsociados(int suscripcionId)
+        {
+            return _context.SuscripcionClientes
+                .Any(sc => sc.SuscripcionId == suscripcionId);
+        }
+
+        public List<SuscripcionCliente> ObtenerPorSuscripcionId(int suscripcionId)
+        {
+            return _context.SuscripcionClientes
+                .Include(sc => sc.Cliente)
+                .Include(sc => sc.Suscripcion)
+                .Where(sc => sc.SuscripcionId == suscripcionId)
+                .ToList();
+        }
     }
 }

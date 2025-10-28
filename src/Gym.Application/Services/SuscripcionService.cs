@@ -6,10 +6,12 @@ namespace Gym.Application.Services
     public class SuscripcionService
     {
         private readonly ISuscripcionRepository _repository;
+        private readonly ISuscripcionClienteRepository _suscripcionClienteRepository;
 
-        public SuscripcionService(ISuscripcionRepository repository)
+        public SuscripcionService(ISuscripcionRepository repository, ISuscripcionClienteRepository suscripcionClienteRepository)
         {
             _repository = repository ?? throw new ArgumentNullException(nameof(repository));
+            _suscripcionClienteRepository = suscripcionClienteRepository ?? throw new ArgumentNullException(nameof(suscripcionClienteRepository));
         }
 
         public void AgregarSuscripcion(Suscripcion suscripcion)
@@ -53,9 +55,29 @@ namespace Gym.Application.Services
                 throw new ArgumentException("La suscripción no existe");
             }
 
-            // TODO: Aquí se podría agregar validación adicional
-            // Por ejemplo, verificar si hay clientes usando esta suscripción
-            // antes de permitir la eliminación
+            // Verificar si tiene clientes asociados
+            if (_suscripcionClienteRepository.TieneClientesAsociados(id))
+            {
+                // Obtener información de los clientes afectados para el mensaje de error
+                var clientesAsociados = _suscripcionClienteRepository.ObtenerPorSuscripcionId(id);
+                var nombresClientes = clientesAsociados
+                    .Select(sc => $"{sc.Cliente.Nombre} {sc.Cliente.Apellido}")
+                    .Take(3) // Mostrar máximo 3 clientes
+                    .ToList();
+
+                var mensajeClientes = nombresClientes.Count > 0 
+                    ? $"Clientes afectados: {string.Join(", ", nombresClientes)}"
+                    : "Tiene clientes asociados";
+
+                var mensajeAdicional = clientesAsociados.Count > 3 
+                    ? $" y {clientesAsociados.Count - 3} más" 
+                    : "";
+
+                throw new InvalidOperationException(
+                    $"No se puede eliminar la suscripción '{suscripcion.Nombre}' porque tiene clientes asociados. " +
+                    $"{mensajeClientes}{mensajeAdicional}. " +
+                    $"Para eliminar esta suscripción, primero debe cambiar a estos clientes a otra suscripción.");
+            }
 
             _repository.Eliminar(id);
         }

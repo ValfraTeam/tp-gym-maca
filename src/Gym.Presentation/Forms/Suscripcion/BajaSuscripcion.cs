@@ -1,6 +1,5 @@
 using Gym.Application.Services;
-using Gym.Infrastructure.Data;
-using Gym.Infrastructure.Repositories;
+using Gym.Application;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -21,9 +20,7 @@ namespace Gym.Presentation
         public BajaSuscripcion()
         {
             InitializeComponent();
-            _suscripcionService = new SuscripcionService(
-                new SuscripcionRepository(new ApplicationDbContext())
-            );
+            _suscripcionService = ServiceContainer.SuscripcionService;
         }
 
         private void BajaSuscripcion_Load(object sender, EventArgs e)
